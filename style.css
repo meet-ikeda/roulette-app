@@ -111,24 +111,6 @@ body {
   transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.btn-circle {
-  width: 150px !important;
-  height: 150px !important;
-  border-radius: 50% !important;
-  padding: 0 !important;
-  display: flex !important;
-  align-items: center;
-  justify-content: center;
-  font-size: 2rem !important;
-}
-
-@media (max-width: 768px) {
-  .btn-circle {
-    width: 120px !important;
-    height: 120px !important;
-  }
-}
-
 .btn-primary {
   background: linear-gradient(135deg, var(--btn-grad-start) 0%, var(--btn-grad-end) 100%);
   color: #fff; /* Always white text on colored gradient button */
