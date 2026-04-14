@@ -160,7 +160,7 @@
         </div>
       </div>
       <div class="action-controls">
-        <button id="close-result" class="btn-primary main-action">OK!</button>
+        <button id="close-result" class="btn-primary main-action btn-circle">OK!</button>
       </div>
     </div>
     <!-- QR Code Modal -->
@@ -177,6 +177,7 @@
 
   <!-- Remote Controller UI (Visible only on mobile in remote mode) -->
   <div id="remote-controller-view" class="remote-controller-view">
+    <button id="remote-exit-btn" class="remote-exit-btn" aria-label="リモコンを終了">&times;</button>
     <div class="remote-header">
       <h1>Remote Control</h1>
       <div id="remote-sync-status">接続中...</div>
@@ -184,6 +185,7 @@
     <div class="remote-buttons">
       <button id="remote-start-btn" class="remote-circle-btn start">START</button>
       <button id="remote-stop-btn" class="remote-circle-btn stop" style="display: none;">STOP</button>
+      <button id="remote-ok-btn" class="remote-circle-btn ok" style="display: none;">OK!</button>
     </div>
     <div class="remote-footer">
       ルーレット画面を操作中

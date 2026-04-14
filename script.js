@@ -274,6 +274,11 @@ function showResult(item) {
   
   resultOverlay.style.display = 'flex';
   startConfetti();
+
+  // Notify remote
+  if (conn && conn.open) {
+    conn.send('show_ok');
+  }
 }
 
 // --- Confetti Animation ---
@@ -348,6 +353,11 @@ function closeResult() {
   startBtn.style.display = 'block';
   stopBtn.style.display = 'none';
   stopConfetti();
+
+  // Notify remote
+  if (conn && conn.open) {
+    conn.send('reset');
+  }
 }
 
 closeResultBtn.addEventListener('click', closeResult);
@@ -371,6 +381,8 @@ const remoteConnectionInfo = document.getElementById('remote-connection-info');
 const remoteControllerView = document.getElementById('remote-controller-view');
 const remoteStartBtn = document.getElementById('remote-start-btn');
 const remoteStopBtn = document.getElementById('remote-stop-btn');
+const remoteOkBtn = document.getElementById('remote-ok-btn');
+const remoteExitBtn = document.getElementById('remote-exit-btn');
 const remoteSyncStatus = document.getElementById('remote-sync-status');
 
 // Initialize based on URL parameters
@@ -440,6 +452,8 @@ function setupHostConnection() {
       if (!isSpinning) startSpin();
     } else if (data === 'stop') {
       if (isSpinning && !isStopping) stopSpin();
+    } else if (data === 'close_result') {
+      closeResult();
     }
   });
 
@@ -462,6 +476,18 @@ function initRemoteMode(targetId) {
       remoteSyncStatus.style.color = '#00d68f';
     });
     
+    conn.on('data', (data) => {
+      if (data === 'show_ok') {
+        remoteStartBtn.style.display = 'none';
+        remoteStopBtn.style.display = 'none';
+        remoteOkBtn.style.display = 'flex';
+      } else if (data === 'reset') {
+        remoteStartBtn.style.display = 'flex';
+        remoteStopBtn.style.display = 'none';
+        remoteOkBtn.style.display = 'none';
+      }
+    });
+
     conn.on('error', (err) => {
       remoteSyncStatus.textContent = '接続エラー';
       remoteSyncStatus.style.color = '#ff3d71';
@@ -481,6 +507,21 @@ function initRemoteMode(targetId) {
       conn.send('stop');
       remoteStopBtn.style.display = 'none';
       remoteStartBtn.style.display = 'flex';
+    }
+  });
+
+  remoteOkBtn.addEventListener('click', () => {
+    if (conn && conn.open) {
+      conn.send('close_result');
+      // Optimistic UI toggle
+      remoteOkBtn.style.display = 'none';
+      remoteStartBtn.style.display = 'flex';
+    }
+  });
+
+  remoteExitBtn.addEventListener('click', () => {
+    if (confirm('リモコンモードを終了しますか？')) {
+      window.location.href = window.location.pathname;
     }
   });
 }

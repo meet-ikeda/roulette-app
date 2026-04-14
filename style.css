@@ -111,6 +111,24 @@ body {
   transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
+.btn-circle {
+  width: 150px !important;
+  height: 150px !important;
+  border-radius: 50% !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem !important;
+}
+
+@media (max-width: 768px) {
+  .btn-circle {
+    width: 120px !important;
+    height: 120px !important;
+  }
+}
+
 .btn-primary {
   background: linear-gradient(135deg, var(--btn-grad-start) 0%, var(--btn-grad-end) 100%);
   color: #fff; /* Always white text on colored gradient button */
@@ -551,9 +569,35 @@ body.remote-mode .remote-controller-view {
   box-shadow: 0 0 50px rgba(255, 61, 113, 0.3);
 }
 
+.remote-circle-btn.ok {
+  background: linear-gradient(135deg, #3366ff 0%, #00d68f 100%);
+  box-shadow: 0 0 50px rgba(0, 214, 143, 0.3);
+}
+
 .remote-circle-btn:active {
   transform: scale(0.92);
   filter: brightness(0.8);
+}
+
+.remote-exit-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.remote-exit-btn:active {
+  background: rgba(255, 82, 82, 0.3);
 }
 
 .remote-footer {
