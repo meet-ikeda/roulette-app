@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>トークテーマルーレット</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=M+PLUS+Rounded+1c:wght@800;900&display=swap" rel="stylesheet">
+  <!-- Remote Control Libraries -->
+  <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+  <div class="app-container" id="app-container">
+    <!-- Main Display Section -->
+    <main class="main-display">
+      <div id="display-area" class="display-area">
+        <div id="item-card" class="item-card">
+          <span class="placeholder">テーマを入力して<br>スタートを押してください</span>
+        </div>
+      </div>
+      
+      <div class="action-controls">
+        <button id="start-btn" class="btn-primary main-action">スタート！</button>
+        <button id="stop-btn" class="btn-danger main-action" style="display: none;">ストップ！</button>
+      </div>
+    </main>
+
+    <!-- Settings Gear Top Right -->
+    <button id="toggle-settings" class="btn-icon gear-btn" aria-label="設定">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+        <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z" />
+      </svg>
+    </button>
+
+    <!-- Settings Overlay -->
+    <aside id="settings-panel" class="settings-panel">
+      <div class="settings-header">
+        <h2>設定メニュー</h2>
+        <button id="close-settings" class="btn-close-small">&times;</button>
+      </div>
+
+      <div class="settings-content">
+        <div class="setting-item">
+          <label>項目の入力 (1行ずつ)</label>
+          <textarea id="text-input" placeholder="テーマを1行ずつ入力してください">実写化で原作を超えたと思うアニメ作品は？
+もし1億円当たったら何に使う？
+一生一つのものしか食べられないとしたら何を選ぶ？
+人生で一番高い買い物は何？
+子供の頃の将来の夢は何だった？
+自分を動物に例えるなら何？
+一番好きな季節とその理由は？
+無人島に一つだけ持っていくなら？
+透明人間になれたら何をする？
+タイムマシンがあったら過去と未来どっちに行きたい？
+自分の性格を一言で表すと？
+最近あった小さな幸せは？
+ストレス解消法を教えてください。
+行ってみたい国とその理由は？
+好きな家事、嫌いな家事は？
+理想の休日の過ごし方は？
+最近ハマっている食べ物や飲み物は？
+尊敬する人は誰ですか？
+自分の意外な一面を教えてください。
+幽霊やUFOを信じますか？
+人生で一番の大失敗を教えてください。
+カラオケで必ず歌う曲は？
+犬派？猫派？それとも？
+好きな言葉や座右の銘は？
+朝型ですか？夜型ですか？
+今一番欲しいものは何ですか？
+過去に戻れるなら、いつの自分に何と言いたい？
+人生で影響を受けた本や漫画は？
+得意料理は何ですか？
+何かコレクションしているものはありますか？
+学生時代の部活動は何をしていましたか？
+宝くじで3億円当たったら、今の仕事を続けますか？
+魔法が一つ使えるなら、どんな魔法が良い？
+宇宙人に出会ったら、まず何を伝えますか？
+日本国内で行ってみたい場所は？
+地震や災害に備えて準備していることは？
+最近「変わったな」と思う自分の考え方は？
+好きな音楽のジャンルは何ですか？
+自分の名前の由来を知っていますか？
+今までの人生で一番緊張した瞬間は？
+お気に入りのリラックス場所は？
+宝くじ以外で「運が良いな」と思ったエピソードは？
+もし明日地球が滅びるとしたら、最後に何を食べたい？
+超能力を一つ持てるなら、何が良いですか？
+自分のチャームポイントはどこだと思いますか？
+10年後の自分はどうなっていると思いますか？
+好きなコンビニスイーツは何ですか？
+忘れられない旅の思い出は？
+最近、感動して泣いたことはありますか？</textarea>
+        </div>
+
+        <div class="setting-item">
+          <label>画像の追加</label>
+          <div class="file-upload">
+            <button class="btn-outline">ファイルを選択</button>
+            <input type="file" id="image-input" multiple accept="image/*">
+          </div>
+          <div id="image-previews" class="image-previews"></div>
+        </div>
+
+        <hr>
+
+        <div class="setting-item">
+          <label>切り替え速度</label>
+          <div class="slider-labels">
+            <span>ゆっくり</span>
+            <span>鬼速</span>
+          </div>
+          <input type="range" id="speed-slider" min="20" max="500" value="440" step="10">
+        </div>
+
+        <div class="setting-item">
+          <label>表示順序</label>
+          <div class="toggle-group">
+            <button class="btn-toggle active" data-mode="random">ランダム</button>
+            <button class="btn-toggle" data-mode="sequential">順番通り</button>
+          </div>
+        </div>
+
+        <div class="setting-item color-settings">
+          <label>配色カスタマイズ</label>
+          <div class="color-picker-row">
+            <div class="color-field">
+              <span>背景</span>
+              <input type="color" id="bg-color-picker" value="#0d0d12">
+            </div>
+            <div class="color-field">
+              <span>文字</span>
+              <input type="color" id="text-color-picker" value="#ffffff">
+            </div>
+          </div>
+        </div>
+
+        <div class="setting-item remote-control-settings">
+          <label>リモコン機能 (iPhoneで操作)</label>
+          <div id="remote-status" class="remote-status">未接続</div>
+          <button id="show-qr-btn" class="btn-outline">QRコードを表示</button>
+        </div>
+
+        <div class="settings-footer">
+          <button id="reset-btn" class="btn-danger-outline">データクリア</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Result Overlay -->
+    <div id="result-overlay" class="result-overlay">
+      <div class="result-card">
+        <div class="result-label">今回のテーマは...</div>
+        <div id="winner-display" class="winner-display">
+          <!-- Text or Image winner goes here -->
+        </div>
+        <button id="close-result" class="btn-primary">OK!</button>
+      </div>
+    </div>
+
+    <!-- QR Code Modal -->
+    <div id="qr-modal" class="modal">
+      <div class="modal-content">
+        <button id="close-qr" class="btn-close-small">&times;</button>
+        <h3>iPhoneでスキャン</h3>
+        <p>同じWi-Fiに接続してスキャンしてください</p>
+        <div id="qrcode-container"></div>
+        <div id="remote-connection-info" class="hint-text">接続待機中...</div>
+      </div>
+    </div>
+
+    <!-- Remote Controller UI (Visible only on mobile in remote mode) -->
+    <div id="remote-controller-view" class="remote-controller-view">
+      <div class="remote-header">
+        <h1>Remote Control</h1>
+        <div id="remote-sync-status">接続中...</div>
+      </div>
+      <div class="remote-buttons">
+        <button id="remote-start-btn" class="remote-circle-btn start">START</button>
+        <button id="remote-stop-btn" class="remote-circle-btn stop" style="display: none;">STOP</button>
+      </div>
+      <div class="remote-footer">
+        ルーレット画面を操作中
+      </div>
+    </div>
+  </div>
+
+  <!-- Audio for Celebration -->
+  <audio id="applause-sound" src="Cheer-Yay02-2(High-Short-Solo).mp3" preload="auto"></audio>
+
+  <script src="script.js"></script>
+</body>
+</html>
