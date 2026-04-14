@@ -343,12 +343,14 @@ resetBtn.addEventListener('click', () => {
   }
 });
 
-closeResultBtn.addEventListener('click', () => {
+function closeResult() {
   resultOverlay.style.display = 'none';
   startBtn.style.display = 'block';
   stopBtn.style.display = 'none';
   stopConfetti();
-});
+}
+
+closeResultBtn.addEventListener('click', closeResult);
 
 // Init
 loadData();
@@ -432,6 +434,9 @@ function setupHostConnection() {
 
   conn.on('data', (data) => {
     if (data === 'start') {
+      if (resultOverlay.style.display === 'flex') {
+        closeResult();
+      }
       if (!isSpinning) startSpin();
     } else if (data === 'stop') {
       if (isSpinning && !isStopping) stopSpin();
