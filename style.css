@@ -350,10 +350,12 @@ input[type="range"]::-webkit-slider-thumb {
   height: 100%;
   background: var(--custom-bg); /* Match background color */
   display: none;
+  flex-direction: column; /* Stack result card and button vertically */
   justify-content: center;
   align-items: center;
   z-index: 200;
   backdrop-filter: blur(40px);
+  gap: 40px; /* Space between card and OK button */
 }
 
 .result-overlay::before {
