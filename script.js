@@ -9,6 +9,10 @@ const resultOverlay = document.getElementById('result-overlay');
 const winnerDisplay = document.getElementById('winner-display');
 const closeResultBtn = document.getElementById('close-result');
 const applauseSound = document.getElementById('applause-sound');
+const audioSpinning = document.getElementById('audio-spinning');
+const audioStopClick = document.getElementById('audio-stop-click');
+const audioSlowingDown = document.getElementById('audio-slowing-down');
+const audioResultFlash = document.getElementById('audio-result-flash');
 const confettiCanvas = document.createElement('canvas');
 
 // Initialize Confetti Canvas
@@ -214,6 +218,10 @@ function startSpin() {
   stopBtn.style.display = 'block';
   settingsPanel.classList.remove('open');
 
+  // Start sound
+  audioSpinning.currentTime = 0;
+  audioSpinning.play().catch(e => console.log("Sound failed:", e));
+
   if (settings.mode === 'sequential') currentIndex = 0;
 
   currentDelay = 520 - settings.speed;
@@ -258,6 +266,13 @@ function stopSpin() {
   isStopping = true;
   // Around 10-15 steps of deceleration feels like ~2 seconds
   stopCounter = 12; 
+
+  // Switch sounds
+  audioSpinning.pause();
+  audioStopClick.currentTime = 0;
+  audioStopClick.play().catch(e => console.log("Sound failed:", e));
+  audioSlowingDown.currentTime = 0;
+  audioSlowingDown.play().catch(e => console.log("Sound failed:", e));
 }
 
 function finishSpin() {
@@ -271,6 +286,10 @@ function showResult(item) {
   winnerDisplay.innerHTML = '';
   updateDisplay(item, winnerDisplay);
   
+  // Final sounds
+  audioSlowingDown.pause();
+  audioResultFlash.currentTime = 0;
+  audioResultFlash.play().catch(e => console.log("Sound failed:", e));
   applauseSound.currentTime = 0;
   applauseSound.play().catch(e => console.log("Sound failed:", e));
   
