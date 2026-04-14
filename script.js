@@ -13,6 +13,12 @@ const audioSpinning = document.getElementById('audio-spinning');
 const audioStopClick = document.getElementById('audio-stop-click');
 const audioSlowingDown = document.getElementById('audio-slowing-down');
 const audioResultFlash = document.getElementById('audio-result-flash');
+
+// Buffer audio for low-latency playback
+[applauseSound, audioSpinning, audioStopClick, audioSlowingDown, audioResultFlash].forEach(audio => {
+  if (audio) audio.load();
+});
+
 const confettiCanvas = document.createElement('canvas');
 
 // Initialize Confetti Canvas
@@ -212,15 +218,15 @@ function startSpin() {
     return;
   }
 
+  // Immediate sound trigger
+  audioSpinning.currentTime = 0;
+  audioSpinning.play().catch(e => console.log("Sound failed:", e));
+
   isSpinning = true;
   isStopping = false;
   startBtn.style.display = 'none';
   stopBtn.style.display = 'block';
   settingsPanel.classList.remove('open');
-
-  // Start sound
-  audioSpinning.currentTime = 0;
-  audioSpinning.play().catch(e => console.log("Sound failed:", e));
 
   if (settings.mode === 'sequential') currentIndex = 0;
 
