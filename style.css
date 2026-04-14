@@ -348,14 +348,14 @@ input[type="range"]::-webkit-slider-thumb {
   left: 0;
   width: 100%;
   height: 100%;
-  background: var(--custom-bg); /* Match background color */
+  background: var(--custom-bg);
   display: none;
-  flex-direction: column; /* Stack result card and button vertically */
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  justify-content: space-between;
+  padding: 80px 40px;
   z-index: 200;
   backdrop-filter: blur(40px);
-  gap: 40px; /* Space between card and OK button */
 }
 
 .result-overlay::before {
@@ -367,9 +367,20 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .result-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  max-width: 90%;
+  width: 100%;
+  max-width: 900px;
   animation: megaPop 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.result-overlay .action-controls {
+  margin-top: 0;
+  width: auto;
 }
 
 @keyframes megaPop {
