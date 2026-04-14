@@ -600,3 +600,57 @@ body.remote-mode .remote-controller-view {
   font-size: 0.9rem;
   color: rgba(255, 255, 255, 0.3);
 }
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+  .main-display {
+    padding: 20px;
+  }
+  
+  .item-card {
+    border-radius: 24px;
+    height: 300px;
+    max-height: 50vh;
+  }
+  
+  .item-card span {
+    font-size: 3rem;
+    padding: 20px;
+  }
+  
+  .main-action {
+    padding: 15px 40px;
+    font-size: 1.4rem;
+  }
+  
+  .action-controls {
+    margin-top: 30px;
+    gap: 15px;
+  }
+  
+  .settings-panel {
+    width: 100%;
+    right: -100%;
+    padding: 30px 20px;
+  }
+  
+  .winner-display span {
+    font-size: 4.5rem;
+  }
+  
+  .result-label {
+    font-size: 1.2rem;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+  }
+  
+  .result-overlay {
+    padding: 60px 20px;
+  }
+
+  .gear-btn {
+    top: 15px;
+    right: 15px;
+    width: 50px;
+    height: 50px;
+  }
+}
