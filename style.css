@@ -90,9 +90,14 @@ body {
 }
 
 .item-card.flicker {
-  transform: scale(1.03);
-  border-color: var(--accent-color);
   box-shadow: 0 0 50px rgba(255, 61, 113, 0.4);
+}
+
+.item-card.winning-card {
+  transform: scale(1.05);
+  border-color: var(--btn-grad-end);
+  box-shadow: 0 0 80px rgba(255, 158, 0, 0.5);
+  border-width: 4px;
 }
 
 .action-controls {
@@ -600,6 +605,24 @@ body.remote-mode .remote-controller-view {
   font-size: 0.9rem;
   color: rgba(255, 255, 255, 0.3);
 }
+
+/* --- Responsive Layout for Result (Mobile only) --- */
+@media (max-width: 768px) {
+  .result-overlay {
+    display: none !important;
+  }
+  
+  /* Mobile result buttons helper */
+  body.mobile-result #start-btn,
+  body.mobile-result #stop-btn {
+    display: none !important;
+  }
+  
+  body.mobile-result #close-result-mobile {
+    display: block !important;
+  }
+}
+
 /* --- Responsive Adjustments --- */
 @media (max-width: 768px) {
   .main-display {

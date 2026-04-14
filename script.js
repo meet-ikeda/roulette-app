@@ -8,6 +8,7 @@ const itemCard = document.getElementById('item-card');
 const resultOverlay = document.getElementById('result-overlay');
 const winnerDisplay = document.getElementById('winner-display');
 const closeResultBtn = document.getElementById('close-result');
+const closeResultMobileBtn = document.getElementById('close-result-mobile');
 const applauseSound = document.getElementById('applause-sound');
 const audioSpinning = document.getElementById('audio-spinning');
 const audioStopClick = document.getElementById('audio-stop-click');
@@ -116,6 +117,8 @@ function adjustColor(hex, amount) {
 // --- Interaction ---
 toggleSettingsBtn.addEventListener('click', () => settingsPanel.classList.toggle('open'));
 closeSettingsBtn.addEventListener('click', () => settingsPanel.classList.remove('open'));
+closeResultBtn.addEventListener('click', closeResult);
+closeResultMobileBtn.addEventListener('click', closeResult);
 
 speedSlider.addEventListener('input', (e) => {
   settings.speed = parseInt(e.target.value);
@@ -299,7 +302,14 @@ function showResult(item) {
   applauseSound.currentTime = 0;
   applauseSound.play().catch(e => console.log("Sound failed:", e));
   
-  resultOverlay.style.display = 'flex';
+  const isMobile = window.innerWidth <= 768;
+  if (isMobile) {
+    document.body.classList.add('mobile-result');
+    itemCard.classList.add('winning-card');
+  } else {
+    resultOverlay.style.display = 'flex';
+  }
+  
   startConfetti();
 
   // Notify remote
@@ -384,6 +394,9 @@ resetBtn.addEventListener('click', () => {
 
 function closeResult() {
   resultOverlay.style.display = 'none';
+  document.body.classList.remove('mobile-result');
+  itemCard.classList.remove('winning-card');
+  
   startBtn.style.display = 'block';
   stopBtn.style.display = 'none';
   stopConfetti();
