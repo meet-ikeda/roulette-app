@@ -34,6 +34,8 @@ const modeButtons = document.querySelectorAll('.btn-toggle');
 const bgColorPicker = document.getElementById('bg-color-picker');
 const textColorPicker = document.getElementById('text-color-picker');
 
+const restoreDefaultBtn = document.getElementById('restore-default-btn');
+
 let imageItems = [];
 let isSpinning = false;
 let isStopping = false;
@@ -80,7 +82,7 @@ function applySettings() {
 
 function updateButtonGradient(color) {
   const gradStart = color;
-  const gradEnd = adjustColor(color, -40); // Slightly darker
+  const gradEnd = '#3366ff'; // Always blue at the bottom-right for a vibrant look
   document.documentElement.style.setProperty('--btn-grad-start', gradStart);
   document.documentElement.style.setProperty('--btn-grad-end', gradEnd);
 }
@@ -341,8 +343,15 @@ function stopConfetti() {
 startBtn.addEventListener('click', startSpin);
 stopBtn.addEventListener('click', stopSpin);
 
+restoreDefaultBtn.addEventListener('click', () => {
+  if (confirm('トークテーマを初期状態（50個のテーマ）に戻しますか？')) {
+    localStorage.removeItem('mousou_text');
+    location.reload();
+  }
+});
+
 resetBtn.addEventListener('click', () => {
-  if (confirm('全ての項目と設定をクリアしますか？')) {
+  if (confirm('全ての項目、色、スピード設定を完全にクリアしますか？')) {
     localStorage.clear();
     location.reload();
   }
