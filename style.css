@@ -94,10 +94,15 @@ body {
 }
 
 .item-card.winning-card {
-  transform: scale(1.05);
   border-color: var(--btn-grad-end);
-  box-shadow: 0 0 80px rgba(255, 158, 0, 0.5);
+  box-shadow: 0 0 100px rgba(255, 158, 0, 0.8);
   border-width: 4px;
+  animation: winning-glow 2s infinite alternate;
+}
+
+@keyframes winning-glow {
+  from { box-shadow: 0 0 50px rgba(255, 158, 0, 0.4); }
+  to { box-shadow: 0 0 120px rgba(255, 158, 0, 0.9); }
 }
 
 .action-controls {
@@ -609,7 +614,9 @@ body.remote-mode .remote-controller-view {
 /* --- Responsive Layout for Result (Mobile only) --- */
 @media (max-width: 768px) {
   .result-overlay {
-    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
   }
   
   /* Mobile result buttons helper */
@@ -619,7 +626,10 @@ body.remote-mode .remote-controller-view {
   }
   
   body.mobile-result #close-result-mobile {
-    display: block !important;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
   }
 }
 

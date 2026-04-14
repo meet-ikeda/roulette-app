@@ -302,10 +302,12 @@ function showResult(item) {
   applauseSound.currentTime = 0;
   applauseSound.play().catch(e => console.log("Sound failed:", e));
   
-  const isMobile = window.innerWidth <= 768;
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
   if (isMobile) {
     document.body.classList.add('mobile-result');
     itemCard.classList.add('winning-card');
+    // Ensure card display area is visible (if it was hidden for some reason)
+    itemCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
   } else {
     resultOverlay.style.display = 'flex';
   }
